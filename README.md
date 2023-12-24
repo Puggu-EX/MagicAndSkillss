@@ -1,0 +1,2 @@
+# MagicAndSkillss
+MC spigot plugin 
