@@ -1,0 +1,11 @@
+name: MagicAndSkills
+version: '${project.version}'
+main: org.puggu.magicandskills.MagicAndSkills
+api-version: '1.20'
+authors: [Puggu]
+description: Magic and Skill plugin
+website: example.com
+commands:
+  gw:
+    description: "Give caller wand"
+    usage: /<command>
