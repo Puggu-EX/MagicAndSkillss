@@ -8,12 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.FireballEvent;
-
-import java.util.List;
 
 
 public class MagicFireball extends MagicSpell implements Listener {
@@ -21,7 +18,7 @@ public class MagicFireball extends MagicSpell implements Listener {
     private Player player;
 
     public MagicFireball(MagicAndSkills plugin) {
-        super(plugin, 2000, 20);
+        super(plugin, 2000, 10);
     }
 
     @EventHandler
@@ -43,11 +40,11 @@ public class MagicFireball extends MagicSpell implements Listener {
     }
 
     @Override
-    public boolean ability() {
+    public void ability() {
         Fireball fireball = player.getWorld().spawn(player.getEyeLocation(), Fireball.class);
         fireball.setShooter(player);
-        fireball.setVelocity(player.getEyeLocation().getDirection().multiply(1.5)); // Adjust the speed of the fireball as desired
-        fireball.setYield(3.0f);
+        fireball.setVelocity(player.getEyeLocation().getDirection().multiply(1.5f)); // Adjust the speed of the fireball as desired
+        fireball.setYield(5.0f);
         fireball.setIsIncendiary(false);
         fireball.setMetadata("MagicFireball", new FixedMetadataValue(plugin, true));
 
@@ -62,8 +59,6 @@ public class MagicFireball extends MagicSpell implements Listener {
                 }
             }
         }.runTaskLater(plugin, 30);
-
-        return true;
     }
 }
 //

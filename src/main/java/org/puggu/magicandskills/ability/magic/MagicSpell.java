@@ -32,10 +32,6 @@ public abstract class MagicSpell extends Ability {
     }
 
     @Override
-    public boolean ability(){
-        return false;
-    }
-    @Override
     public void depleteResource(Player player, Double amount) {
         if (playerEnergyManager.playerHasEnergyContainers(player)){
             playerEnergyManager.incrementPlayerMana(player, -amount);
@@ -44,7 +40,6 @@ public abstract class MagicSpell extends Ability {
 
     @Override
     public boolean enoughResource(Player player, Double cost) {
-        double availableMana = playerEnergyManager.getPlayerMana(player);
-        return availableMana > cost;
+        return playerEnergyManager.getPlayerMana(player) > cost;
     }
 }

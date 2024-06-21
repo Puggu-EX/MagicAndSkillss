@@ -8,22 +8,22 @@ import org.puggu.magicandskills.MagicAndSkills;
 
 public class PlayerEnergyManager {
     private final NamespacedKey manaKey;
-    private final NamespacedKey kiKey;
+    private final NamespacedKey staminaKey;
 
     public PlayerEnergyManager(MagicAndSkills plugin) {
         this.manaKey = new NamespacedKey(plugin, "mana-key");
-        this.kiKey = new NamespacedKey(plugin, "ki-key");
+        this.staminaKey = new NamespacedKey(plugin, "stamina-key");
     }
 
     public void initPlayerEnergy(Player player){
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
         playerContainer.set(manaKey, PersistentDataType.DOUBLE, 20d);
-        playerContainer.set(kiKey, PersistentDataType.DOUBLE, 20d);
+        playerContainer.set(staminaKey, PersistentDataType.DOUBLE, 20d);
     }
 
     public boolean playerHasEnergyContainers(Player player){
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
-        return playerContainer.has(kiKey, PersistentDataType.DOUBLE) && playerContainer.has(manaKey, PersistentDataType.DOUBLE);
+        return playerContainer.has(staminaKey, PersistentDataType.DOUBLE) && playerContainer.has(manaKey, PersistentDataType.DOUBLE);
     }
 
     public double getPlayerMana(Player player){
@@ -34,10 +34,10 @@ public class PlayerEnergyManager {
         return -1d;
     }
 
-    public double getPlayerKi(Player player){
+    public double getPlayerStamina(Player player){
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
-        if (playerContainer.has(kiKey, PersistentDataType.DOUBLE)){
-            return playerContainer.get(kiKey, PersistentDataType.DOUBLE);
+        if (playerContainer.has(staminaKey, PersistentDataType.DOUBLE)){
+            return playerContainer.get(staminaKey, PersistentDataType.DOUBLE);
         }
         return -1d;
     }
@@ -51,12 +51,12 @@ public class PlayerEnergyManager {
         }
     }
 
-    public void incrementPlayerKi(Player player, Double amount){
+    public void incrementPlayerStamina(Player player, Double amount){
         PersistentDataContainer playerContainer = player.getPersistentDataContainer();
-        if (playerContainer.has(kiKey, PersistentDataType.DOUBLE)){
-            double ki = playerContainer.get(kiKey, PersistentDataType.DOUBLE);
-            ki += amount;
-            playerContainer.set(kiKey, PersistentDataType.DOUBLE, ki);
+        if (playerContainer.has(staminaKey, PersistentDataType.DOUBLE)){
+            double stamina = playerContainer.get(staminaKey, PersistentDataType.DOUBLE);
+            stamina += amount;
+            playerContainer.set(staminaKey, PersistentDataType.DOUBLE, stamina);
         }
     }
 }

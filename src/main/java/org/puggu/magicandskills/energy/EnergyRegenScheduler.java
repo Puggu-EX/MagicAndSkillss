@@ -19,8 +19,8 @@ public class EnergyRegenScheduler implements Runnable{
             if (playerEnergyManager.getPlayerMana(player) < 100){
                 playerEnergyManager.incrementPlayerMana(player, 1d);
             }
-            if (playerEnergyManager.getPlayerKi(player) < 100){
-                playerEnergyManager.incrementPlayerKi(player, 1d);
+            if (playerEnergyManager.getPlayerStamina(player) < 100){
+                playerEnergyManager.incrementPlayerStamina(player, 1d);
             }
         }
     }

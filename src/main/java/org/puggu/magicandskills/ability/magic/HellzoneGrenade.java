@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
-import org.puggu.magicandskills.ability.Ability;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.HellzoneEvent;
 
@@ -31,21 +30,15 @@ public class HellzoneGrenade extends MagicSpell implements Listener {
         this.player = event.getPlayer();
         executeAbility(player);
     }
+
     @Override
-    public boolean ability(){
-
-        if (isOnCooldown()) {
-            player.sendMessage("Cooldown: " + (cooldownTime - timeRemaining()));
-            return false;
-        }
-
+    public void ability(){
         Location origin = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(2));
         RayTraceResult result = player.getWorld().rayTraceEntities(origin, player.getEyeLocation().getDirection(), 40.0);
-        if (result != null && result.getHitEntity() != null && result.getHitEntity() instanceof Mob) {
+        if (result != null && result.getHitEntity() != null && result.getHitEntity() != null) { // was if r.ghe instance of Mob
             Entity entity = result.getHitEntity();
             if (player.getLocation().distance(entity.getLocation()) < 5) {
                 player.sendMessage("You're too close to use this!");
-                return false;
             }
             setOnCooldown();
             World world = player.getWorld();
@@ -62,7 +55,6 @@ public class HellzoneGrenade extends MagicSpell implements Listener {
                 }
             }.runTaskLater(plugin, 10);
         }
-        return true;
     }
 
     private void summonFireball(World world, Player player, Location loc, int radius) {
@@ -76,7 +68,7 @@ public class HellzoneGrenade extends MagicSpell implements Listener {
         fireball.setVelocity(loc.getDirection().multiply(1.5));
         fireball.setYield(0.0f);
         fireball.setShooter(player);
-        fireball.setBounce(false);
+        fireball.setBounce(false);  // Doesnt seem to work
         fireball.setInvulnerable(true);
         new BukkitRunnable() {
             @Override

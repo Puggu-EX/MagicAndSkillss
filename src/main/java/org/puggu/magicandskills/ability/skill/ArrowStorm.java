@@ -25,9 +25,8 @@ public class ArrowStorm extends Skill implements Listener {
     }
 
     @Override
-    protected boolean ability() {
-
-        int numberOfArrows = 10; // Change this value to the desired number of arrows
+    protected void ability() {
+        int numberOfArrows = 10;
 
         new BukkitRunnable() {
             int arrowsSpawned = 0;
@@ -37,7 +36,7 @@ public class ArrowStorm extends Skill implements Listener {
                 if (arrowsSpawned < numberOfArrows) {
                     // Spawn an arrow at the calculated location
                     Arrow arrow = player.getWorld().spawnArrow(
-                            player.getEyeLocation(), player.getEyeLocation().getDirection(), 10.0f, 0.0f
+                            player.getEyeLocation(), player.getEyeLocation().getDirection(), 2.0f, 1.0f
                     );
                     arrow.setShooter(player);
                     arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
@@ -47,7 +46,6 @@ public class ArrowStorm extends Skill implements Listener {
                     cancel(); // Stop the task after all arrows have been spawned
                 }
             }
-        }.runTaskTimer(plugin, 0L, 1L); // Delay of 2 ticks (0.1 seconds)
-        return true;
+        }.runTaskTimer(plugin, 0L, 3L);
     }
 }

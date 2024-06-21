@@ -21,6 +21,7 @@ import org.puggu.magicandskills.ability.Ability;
 import org.puggu.magicandskills.MagicAndSkills;
 
 public class BindSpell extends MagicSpell implements Listener {
+    // TODO: Currently restricting player movement based on the PlayerMoveEvent, this works but could be costly as it checks every time the player moves
 
     private final MagicAndSkills plugin;
 
@@ -56,11 +57,12 @@ public class BindSpell extends MagicSpell implements Listener {
                     }.runTaskLater(plugin, 80);
                 } else if (entity instanceof Player) {
                     player.playSound(player, Sound.ENTITY_LEASH_KNOT_PLACE, 1f, 1f);
-
                     Player targetPlayer = (Player) entity;
+
                     targetPlayer.setMetadata("CannotMove", new FixedMetadataValue(plugin, true));
+//                    targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2, true, false, true));
+
                     targetPlayer.playSound(targetPlayer, Sound.ENTITY_LEASH_KNOT_PLACE, 1f, 1f);
-                    targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2, true, false, true));
                     targetPlayer.sendMessage("You have been BOUNDED!");
                     new BukkitRunnable() {
                         @Override
@@ -73,6 +75,11 @@ public class BindSpell extends MagicSpell implements Listener {
                 }
             }
         }
+    }
+
+    @Override
+    public void ability(){
+
     }
 
     @EventHandler

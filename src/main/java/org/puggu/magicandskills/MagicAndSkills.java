@@ -2,6 +2,7 @@ package org.puggu.magicandskills;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.puggu.magicandskills.ability.skill.ArrowStorm;
+import org.puggu.magicandskills.ability.skill.FragmentationArrow;
 import org.puggu.magicandskills.commands.GiveWand;
 import org.puggu.magicandskills.actionbar.DisplayActionBarSchedule;
 import org.puggu.magicandskills.ability.events.EventController;
@@ -12,7 +13,9 @@ import org.puggu.magicandskills.ability.magic.MagicLightingStrike;
 import org.puggu.magicandskills.ability.skill.Dash;
 import org.puggu.magicandskills.ability.skill.Substitution;
 import org.puggu.magicandskills.energy.EnergyRegenScheduler;
-import org.puggu.magicandskills.genericlisteners.OnPlayerJoinEnergy;
+import org.puggu.magicandskills.genericlisteners.OnPlayerJoinInitEnergyManagers;
+
+import java.util.Objects;
 
 public final class MagicAndSkills extends JavaPlugin {
 
@@ -28,16 +31,19 @@ public final class MagicAndSkills extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new BindSpell(this), this);
         this.getServer().getPluginManager().registerEvents(new EventController(this), this);
         this.getServer().getPluginManager().registerEvents(new Dash(this), this);
-        this.getServer().getPluginManager().registerEvents(new OnPlayerJoinEnergy(this), this);
+        this.getServer().getPluginManager().registerEvents(new OnPlayerJoinInitEnergyManagers(this), this);
         this.getServer().getPluginManager().registerEvents(new ArrowStorm(this), this);
+        this.getServer().getPluginManager().registerEvents(new DisplayActionBarSchedule(this), this);
+        this.getServer().getPluginManager().registerEvents(new FragmentationArrow(this), this);
 
-        this.getCommand("gw").setExecutor(new GiveWand(this));
+        Objects.requireNonNull(this.getCommand("gw")).setExecutor(new GiveWand(this));
 
         DisplayActionBarSchedule displayActionBarSchedule = new DisplayActionBarSchedule(this);
         actionBarTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, displayActionBarSchedule, 0L, 20L);
 
         EnergyRegenScheduler energyRegenScheduler = new EnergyRegenScheduler(this);
         energyRegenTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, energyRegenScheduler, 0L, 20L);
+
     }
 
     @Override

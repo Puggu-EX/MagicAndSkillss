@@ -7,10 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.puggu.magicandskills.ability.Ability;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.SubstitutionEvent;
 import org.puggu.magicandskills.ability.magic.MagicSpell;
@@ -29,7 +27,7 @@ public class Substitution extends MagicSpell implements Listener {
         System.out.println("Received SubstitutionEvent");
 
         if (isOnCooldown()) {
-            player.sendMessage("Cooldown: " + (cooldownTime - timeRemaining()));
+            player.sendMessage("Cooldown: " + (cooldownTime - timeSinceLastUsed()));
             return;
         } else {
             setOnCooldown();
@@ -84,4 +82,8 @@ public class Substitution extends MagicSpell implements Listener {
         }
     }
 
+    @Override
+    protected void ability() {
+
+    }
 }
