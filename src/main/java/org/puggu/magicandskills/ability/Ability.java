@@ -1,11 +1,11 @@
 package org.puggu.magicandskills.ability;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
-import org.puggu.magicandskills.actionbar.DisplayActionBarSchedule;
-import org.puggu.magicandskills.energy.PlayerEnergyManager;
+import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
 public abstract class Ability {
     protected final long cooldownTime;
@@ -75,6 +75,8 @@ public abstract class Ability {
             return;
         }
 
+        // Successful cast
+        player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1f, 1f);
         depleteResource(player, cost);
         ability();
         setOnCooldown();

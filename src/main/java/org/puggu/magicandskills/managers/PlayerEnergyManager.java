@@ -1,4 +1,4 @@
-package org.puggu.magicandskills.energy;
+package org.puggu.magicandskills.managers;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;

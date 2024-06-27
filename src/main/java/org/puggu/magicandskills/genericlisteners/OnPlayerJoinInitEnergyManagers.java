@@ -5,8 +5,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.energy.PlayerClickManager;
-import org.puggu.magicandskills.energy.PlayerEnergyManager;
+import org.puggu.magicandskills.managers.PlayerClickManager;
+import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
 public class OnPlayerJoinInitEnergyManagers implements Listener {
 

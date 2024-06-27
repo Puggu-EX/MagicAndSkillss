@@ -5,8 +5,8 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class ArrowStormEvent extends AbilityEvent {
-    public ArrowStormEvent(Player player) {
+public class ArrowGatlingEvent extends AbilityEvent {
+    public ArrowGatlingEvent(Player player) {
         super(player);
     }
 }

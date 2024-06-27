@@ -26,7 +26,7 @@ public class HellzoneGrenade extends MagicSpell implements Listener {
     }
 
     @EventHandler
-    public void use(HellzoneEvent event) {
+    public void onHellzoneGrenadeEvent(HellzoneEvent event) {
         this.player = event.getPlayer();
         executeAbility(player);
     }
@@ -35,6 +35,7 @@ public class HellzoneGrenade extends MagicSpell implements Listener {
     public void ability(){
         Location origin = player.getEyeLocation().clone().add(player.getEyeLocation().getDirection().multiply(2));
         RayTraceResult result = player.getWorld().rayTraceEntities(origin, player.getEyeLocation().getDirection(), 40.0);
+
         if (result != null && result.getHitEntity() != null && result.getHitEntity() != null) { // was if r.ghe instance of Mob
             Entity entity = result.getHitEntity();
             if (player.getLocation().distance(entity.getLocation()) < 5) {

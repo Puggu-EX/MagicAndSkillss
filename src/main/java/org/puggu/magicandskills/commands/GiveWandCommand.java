@@ -4,20 +4,22 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.item.wand.FireWand;
+import org.puggu.magicandskills.item.wand.WandTagger;
+import org.puggu.magicandskills.item.wand.WandType;
 
 
-public class GiveWand implements CommandExecutor {
+public class GiveWandCommand implements CommandExecutor {
 
     private final MagicAndSkills plugin;
+    private final WandTagger tagger;
 
-    public GiveWand(MagicAndSkills plugin) {
+    public GiveWandCommand(MagicAndSkills plugin) {
         this.plugin = plugin;
+        tagger = new WandTagger(plugin);
     }
 
 
@@ -34,8 +36,9 @@ public class GiveWand implements CommandExecutor {
 //                itemMeta.getPersistentDataContainer();
 //                wand.setItemMeta(itemMeta);
                 ItemStack wand = new ItemStack(Material.STICK);
-
+                tagger.setTypeOfWand(wand, WandType.FIRE);
 //                inventory.addItem(new FireWand(plugin).getWand());
+                inventory.addItem(wand);
             }
         }
         return true;

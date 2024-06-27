@@ -9,3 +9,6 @@ commands:
   gw:
     description: "Give caller wand"
     usage: /<command>
+  suicide:
+    description: "kys menu"
+    usage: /<command>

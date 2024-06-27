@@ -1,4 +1,4 @@
-package org.puggu.magicandskills.energy;
+package org.puggu.magicandskills.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,7 +12,7 @@ import java.util.*;
 public class PlayerClickManager {
     private final MagicAndSkills plugin;
 
-    private static HashMap<UUID, List<PlayerClick>> playerClicks = new HashMap<>();
+    private static final HashMap<UUID, List<PlayerClick>> playerClicks = new HashMap<>();
 
     public PlayerClickManager(MagicAndSkills plugin) {
         this.plugin = plugin;
@@ -46,9 +46,9 @@ public class PlayerClickManager {
         Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
         if (clicks.size() == 3) {
             // Call EventManager/CastManager to handle spell execution
-            player.sendMessage("Attempting to Cast: " + getCastSequenceAsString(player));
+//            player.sendMessage("Attempting to Cast: " + getCastSequenceAsString(player));
             PlayerCastManager castManager = new PlayerCastManager(plugin);
-            castManager.castComplexSpell(player, getCastSequenceAsString(player));
+            castManager.castHandler(player, getCastSequenceAsString(player));
             clearClicks(player);
         }
 

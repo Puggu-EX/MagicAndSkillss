@@ -1,4 +1,4 @@
-package org.puggu.magicandskills.energy;
+package org.puggu.magicandskills.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

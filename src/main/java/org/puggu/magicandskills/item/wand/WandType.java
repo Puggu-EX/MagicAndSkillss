@@ -12,7 +12,14 @@ public enum WandType {
         void handleSpell() {
 
         }
+    },
+    WATER(){
+        @Override
+        void handleSpell() {
+
+        }
     };
+
 
     abstract void handleSpell();
 }

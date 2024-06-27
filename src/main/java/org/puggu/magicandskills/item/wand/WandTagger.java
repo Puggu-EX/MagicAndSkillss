@@ -1,6 +1,7 @@
 package org.puggu.magicandskills.item.wand;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,9 +29,27 @@ public class WandTagger {
         }
 
         List<String> lore = new ArrayList<>();
-        lore.add(ChatColor.RED + "Fire Wand");
-        lore.add("This wand gives you the power");
-        lore.add("to cast fire spells");
+        switch (type) {
+            case FIRE:
+                meta.setDisplayName(ChatColor.RED + "Fire Wand");
+                lore.add(ChatColor.RED + "Fire Wand");
+                lore.add("This wand gives you the power");
+                lore.add("to cast fire spells");
+                break;
+            case LIGHTNING:
+                meta.setDisplayName(ChatColor.WHITE + "LIGHTNING Wand");
+                lore.add(ChatColor.WHITE + "LIGHTNING Wand");
+                lore.add("This wand gives you the power");
+                lore.add("to cast lightning spells");
+                break;
+            case WATER:
+                meta.setDisplayName(ChatColor.BLUE + "WATER Wand");
+                lore.add(ChatColor.BLUE + "WATER Wand");
+                lore.add("This wand gives you the power");
+                lore.add("to cast water spells");
+                break;
+        }
+
         meta.setLore(lore);
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
@@ -50,5 +69,11 @@ public class WandTagger {
             return null;
         }
         return WandType.valueOf(typeValue);
+    }
+
+    public ItemStack getWand(){
+        ItemStack wand = new ItemStack(Material.STICK);
+
+        return wand;
     }
 }

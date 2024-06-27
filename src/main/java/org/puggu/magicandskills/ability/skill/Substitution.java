@@ -24,7 +24,6 @@ public class Substitution extends MagicSpell implements Listener {
     @EventHandler
     private void onPlayerInteract(SubstitutionEvent event) {
         Player player = event.getPlayer();
-        System.out.println("Received SubstitutionEvent");
 
         if (isOnCooldown()) {
             player.sendMessage("Cooldown: " + (cooldownTime - timeSinceLastUsed()));

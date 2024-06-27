@@ -9,26 +9,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public final class SubstitutionEvent extends Event {
-
-    private static final HandlerList handlers = new HandlerList();
-    private final Player player;
-
-
-    public SubstitutionEvent(Player player){
-        this.player = player;
-    }
-
-    public Player getPlayer(){
-        return this.player;
-    }
-
-    @NonNull
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList(){
-        return handlers;
+public final class SubstitutionEvent extends AbilityEvent {
+    public SubstitutionEvent(Player player) {
+        super(player);
     }
 }
