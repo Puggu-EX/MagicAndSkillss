@@ -10,6 +10,12 @@ import org.puggu.magicandskills.MagicAndSkills;
 
 public class Despawn {
 
+    private final MagicAndSkills plugin;
+
+    public Despawn(MagicAndSkills plugin) {
+        this.plugin = plugin;
+    }
+
     public void despawnEffectOnHit(Entity entity, Particle particle, Location location, int delay) {
 
         new BukkitRunnable() {
@@ -18,7 +24,7 @@ public class Despawn {
                 location.getWorld().spawnParticle(particle, location, 50, 0.5, .5, 0.5, 0);
                 entity.remove();
             }
-        }.runTaskLater(MagicAndSkills.getPlugin(), delay);
+        }.runTaskLater(plugin, delay);
     }
 
     public void despawnEffectOnHit(Entity entity) {

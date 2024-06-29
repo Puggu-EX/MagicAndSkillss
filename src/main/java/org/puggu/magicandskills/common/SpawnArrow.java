@@ -13,8 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpawnArrow {
+    private MagicAndSkills plugin;
 
-    ArrowTagger arrowTagger = new ArrowTagger(MagicAndSkills.getPlugin());
+    public SpawnArrow(MagicAndSkills plugin) {
+        this.plugin = plugin;
+    }
+
+    ArrowTagger arrowTagger = new ArrowTagger(plugin);
 
     public Arrow spawnArrow(Player shooter, float power, float accuracy) {
         shooter.playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, 1f, 1f);
@@ -50,10 +55,10 @@ public class SpawnArrow {
         return arrows;
     }
 
-    public List<Arrow> spawnArrows(Player shooter, Location location, float amount, float power, float accuracy) {
+    public List<Arrow> spawnArrows(Player shooter, Location location, Vector vector, float amount, float power, float accuracy) {
         List<Arrow> arrows = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            Arrow arrow = shooter.getWorld().spawnArrow(location, location.getDirection(), power, accuracy);
+            Arrow arrow = shooter.getWorld().spawnArrow(location, vector, power, accuracy);
             arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
 
             arrowTagger.tagArrow(arrow);

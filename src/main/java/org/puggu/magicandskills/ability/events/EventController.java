@@ -18,7 +18,9 @@ import java.util.*;
 public class EventController implements Listener {
     private final PlayerClickManager playerClickManager;
 
+    private final MagicAndSkills plugin;
     public EventController(MagicAndSkills plugin) {
+        this.plugin = plugin;
         this.playerClickManager = new PlayerClickManager(plugin);
     }
 
@@ -29,7 +31,7 @@ public class EventController implements Listener {
                 Objects.requireNonNull(event.getItem()).getType() != Material.STICK ||
                 event.getHand() != EquipmentSlot.HAND ||
                 !Objects.requireNonNull(event.getItem().getItemMeta()).getPersistentDataContainer().has(
-                        new NamespacedKey(MagicAndSkills.getPlugin(), "wand-type"), PersistentDataType.STRING)) {
+                        new NamespacedKey(plugin, "wand-type"), PersistentDataType.STRING)) {
             return;
         }
 

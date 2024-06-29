@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import static org.bukkit.Bukkit.getServer;
 
 public class KillPlayerMenu extends PaginatedMenu {
+    private MagicAndSkills plugin;
 
-    public KillPlayerMenu(PlayerMenuUtility playerMenuUtility) {
+    public KillPlayerMenu(PlayerMenuUtility playerMenuUtility, MagicAndSkills plugin) {
         super(playerMenuUtility);
     }
 
@@ -83,7 +84,7 @@ public class KillPlayerMenu extends PaginatedMenu {
                     ItemMeta playerMeta = playerItem.getItemMeta();
                     playerMeta.setDisplayName(ChatColor.RED + players.get(index).getDisplayName());
 
-                    playerMeta.getPersistentDataContainer().set(new NamespacedKey(MagicAndSkills.getPlugin(), "uuid"), PersistentDataType.STRING, players.get(index).getUniqueId().toString());
+                    playerMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "uuid"), PersistentDataType.STRING, players.get(index).getUniqueId().toString());
                     playerItem.setItemMeta(playerMeta);
 
                     inventory.addItem(playerItem);

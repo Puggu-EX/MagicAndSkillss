@@ -18,11 +18,14 @@ import java.util.List;
 
 public class ArrowGatling extends Skill implements Listener {
 
-    SpawnArrow spawnArrow = new SpawnArrow();
+    private MagicAndSkills plugin;
 
     public ArrowGatling(MagicAndSkills plugin) {
         super(plugin, 2000, 10);
+        this.plugin = plugin;
     }
+
+    SpawnArrow spawnArrow = new SpawnArrow(plugin);
 
     private Player player;
 
@@ -38,7 +41,7 @@ public class ArrowGatling extends Skill implements Listener {
 
 //        List<Entity> arrows = new ArrayList<>();
 //        DespawnLater despawnLater = new DespawnLater();
-        ArrowTagger arrowTagger = new ArrowTagger(MagicAndSkills.getPlugin());
+        ArrowTagger arrowTagger = new ArrowTagger(plugin);
 
         new BukkitRunnable() {
             int arrowsSpawned = 0;

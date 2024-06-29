@@ -20,7 +20,7 @@ public class ArrowStorm extends MagicSpell implements Listener {
     }
 
     private Player player;
-    private SpawnArrow spawnArrow = new SpawnArrow();
+    SpawnArrow spawnArrow = new SpawnArrow(plugin);
 
     @EventHandler
     private void onArrowStormEvent(ArrowStormEvent arrowStormEvent) {

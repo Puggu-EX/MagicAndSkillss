@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public final class MagicAndSkills extends JavaPlugin {
 
-    private static MagicAndSkills plugin;
+//    private static MagicAndSkills plugin;
 
     private int actionBarTask;
     private int energyRegenTask;
@@ -31,10 +31,10 @@ public final class MagicAndSkills extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
+//        plugin = this;
 
         this.getServer().getPluginManager().registerEvents(new MenuListener(), this);
-        this.getServer().getPluginManager().registerEvents(new ProjectileHitListener(), this);
+        this.getServer().getPluginManager().registerEvents(new ProjectileHitListener(this), this);
 
         this.getServer().getPluginManager().registerEvents(new OnPlayerJoinInitEnergyManagers(this), this);
         this.getServer().getPluginManager().registerEvents(new EventController(this), this);
@@ -84,7 +84,7 @@ public final class MagicAndSkills extends JavaPlugin {
         this.getServer().getScheduler().cancelTask(energyRegenTask);
     }
 
-    public static MagicAndSkills getPlugin(){
-        return plugin;
-    }
+//    public static MagicAndSkills getPlugin(){
+//        return plugin;
+//    }
 }

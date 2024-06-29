@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ArrowVolley extends Skill implements Listener {
 
-    SpawnArrow spawnArrow = new SpawnArrow();
+    SpawnArrow spawnArrow = new SpawnArrow(plugin);
 
     public ArrowVolley(MagicAndSkills plugin) {
         super(plugin, 2000, 10);
@@ -36,9 +36,8 @@ public class ArrowVolley extends Skill implements Listener {
     protected void ability() {
         // Spawn an arrow at the calculated location
         Arrow arrow = player.getWorld().spawnArrow(
-                player.getEyeLocation(), player.getEyeLocation().getDirection(), 1.0f, 1.0f
+                player.getEyeLocation(), player.getEyeLocation().getDirection(), 3.0f, 1.0f
         );
-        arrow.setGravity(false);
         arrow.setShooter(player);
         arrow.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
 
@@ -53,15 +52,15 @@ public class ArrowVolley extends Skill implements Listener {
                     cancel();
                 }
 
-//                 spawnArrow.spawnArrows(player, arrow.getLocation(), 40, 3f, 1f);
+                 spawnArrow.spawnArrows(player, arrow.getLocation(), arrow.getVelocity(), 40, 2f, 20f);
 
-                Location location = arrow.getLocation();
-                for (int i = 0; i < 40; i++){
-                     Arrow a = player.getWorld().spawnArrow(
-                                    location, arrow.getVelocity(), 2.0f, 20.0f);
-                     a.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
-                     arrows.add(a);
-                }
+//                Location location = arrow.getLocation();
+//                for (int i = 0; i < 40; i++){
+//                     Arrow a = player.getWorld().spawnArrow(
+//                                    location, arrow.getVelocity(), 2.0f, 20.0f);
+//                     a.setPickupStatus(AbstractArrow.PickupStatus.DISALLOWED);
+//                     arrows.add(a);
+//                }
             }
         }.runTaskLater(plugin, 10L);
 

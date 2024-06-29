@@ -8,8 +8,13 @@ import org.puggu.magicandskills.MagicAndSkills;
 import java.util.List;
 
 public class DespawnLater {
+    private MagicAndSkills plugin;
 
-    public  void despawnLater(Entity entity, long tickDelay) {
+    public DespawnLater(MagicAndSkills plugin) {
+        this.plugin = plugin;
+    }
+
+    public void despawnLater(Entity entity, long tickDelay) {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -18,7 +23,7 @@ public class DespawnLater {
                     entity.remove();
                 }
             }
-        }.runTaskLater(MagicAndSkills.getPlugin(), tickDelay);
+        }.runTaskLater(plugin, tickDelay);
     }
 
     public void despawnLater(List<Entity> entities, long tickDelay) {
@@ -33,7 +38,7 @@ public class DespawnLater {
                     e.remove();
                 }
             }
-        }.runTaskLater(MagicAndSkills.getPlugin(), tickDelay);
+        }.runTaskLater(plugin, tickDelay);
     }
 
     public void despawnLater(List<Entity> entities, long tickDelay, boolean despawnParticles) {
@@ -50,6 +55,6 @@ public class DespawnLater {
                     }
                 }
             }
-        }.runTaskLater(MagicAndSkills.getPlugin(), tickDelay);
+        }.runTaskLater(plugin, tickDelay);
     }
 }
