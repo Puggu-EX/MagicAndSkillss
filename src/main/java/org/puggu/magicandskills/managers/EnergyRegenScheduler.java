@@ -17,10 +17,10 @@ public class EnergyRegenScheduler implements Runnable{
     public void run() {
         for (Player player: Bukkit.getOnlinePlayers()){
             if (playerEnergyManager.getPlayerMana(player) < 100){
-                playerEnergyManager.incrementPlayerMana(player, 1d);
+                playerEnergyManager.incrementPlayerMana(player, 1);
             }
             if (playerEnergyManager.getPlayerStamina(player) < 100){
-                playerEnergyManager.incrementPlayerStamina(player, 1d);
+                playerEnergyManager.incrementPlayerStamina(player, 1);
             }
         }
     }

@@ -7,21 +7,20 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.item.ArrowTagger;
+import org.puggu.magicandskills.item.tagger.ArrowTagger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpawnArrow {
-    private MagicAndSkills plugin;
 
+    ArrowTagger arrowTagger = null;
     public SpawnArrow(MagicAndSkills plugin) {
-        this.plugin = plugin;
+        arrowTagger = new ArrowTagger(plugin);
     }
 
-    ArrowTagger arrowTagger = new ArrowTagger(plugin);
-
     public Arrow spawnArrow(Player shooter, float power, float accuracy) {
+
         shooter.playSound(shooter.getLocation(), Sound.ENTITY_ARROW_SHOOT, 1f, 1f);
         Arrow arrow = shooter.getWorld().spawnArrow(
                 shooter.getEyeLocation(), shooter.getEyeLocation().getDirection(), power, accuracy

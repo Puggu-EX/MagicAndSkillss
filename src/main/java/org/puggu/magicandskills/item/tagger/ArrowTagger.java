@@ -1,8 +1,7 @@
-package org.puggu.magicandskills.item;
+package org.puggu.magicandskills.item.tagger;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Arrow;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.puggu.magicandskills.MagicAndSkills;
 

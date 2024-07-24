@@ -1,5 +1,6 @@
 package org.puggu.magicandskills.ability.skill;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
@@ -7,21 +8,26 @@ import org.puggu.magicandskills.ability.Ability;
 import org.puggu.magicandskills.ability.ReasonForCastFail;
 
 public abstract class Skill extends Ability {
-    private final Double staminaCost;
-    protected Skill(MagicAndSkills plugin, long cooldownTime, double cost) {
-        super(plugin, cooldownTime, cost);
-        this.staminaCost = cost;
+    private final int staminaCost;
+    protected Skill(MagicAndSkills plugin, Player player, long cooldownTime, int staminaCost, NamespacedKey abilityKey) {
+        super(plugin, player, cooldownTime, staminaCost, abilityKey);
+        this.staminaCost = staminaCost;
     }
 
     @Override
-    public void depleteResource(Player player, Double amount) {
-        if (playerEnergyManager.playerHasEnergyContainers(player)){
+    public void depleteResource(Player player, int amount) {
+        if (playerEnergyManager.hasEnergyContainers(player)){
             playerEnergyManager.incrementPlayerStamina(player, -amount);
         }
     }
 
     @Override
-    public boolean enoughResource(Player player, Double cost) {
+    protected void incrementResource(Player player, int amount) {
+        return;
+    }
+
+    @Override
+    public boolean enoughResource(Player player, int cost) {
         double availableStamina = playerEnergyManager.getPlayerStamina(player);
         return availableStamina > cost;
     }
@@ -38,7 +44,7 @@ public abstract class Skill extends Ability {
         }
     }
 
-    public Double getStaminaCost() {
+    public int getStaminaCost() {
         return staminaCost;
     }
 }

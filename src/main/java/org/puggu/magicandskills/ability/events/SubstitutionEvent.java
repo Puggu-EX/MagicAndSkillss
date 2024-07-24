@@ -9,7 +9,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public final class SubstitutionEvent extends AbilityEvent {
+public class SubstitutionEvent extends AbilityEvent {
     public SubstitutionEvent(Player player) {
         super(player);
     }

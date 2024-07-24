@@ -10,29 +10,24 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.ability.events.SubstitutionEvent;
-import org.puggu.magicandskills.ability.magic.MagicSpell;
 
-public class Substitution extends MagicSpell implements Listener {
-    private final MagicAndSkills plugin;
+public class Substitution extends Skill implements Listener {
 
-    public Substitution(MagicAndSkills plugin) {
-        super(plugin, 4000, 10);
-        this.plugin = plugin;
+    public Substitution(MagicAndSkills plugin, Player player) {
+        super(plugin, player, 4000, 10, new NamespacedKey(plugin, "Substitution"));
     }
 
     @EventHandler
-    private void onPlayerInteract(SubstitutionEvent event) {
-        Player player = event.getPlayer();
-
-        if (isOnCooldown()) {
-            player.sendMessage("Cooldown: " + (cooldownTime - timeSinceLastUsed()));
-            return;
-        } else {
-            setOnCooldown();
+    private void onSubLogBreak(BlockBreakEvent event) {
+        if (event.getBlock().hasMetadata("SubstitutionLog")) {
+            event.setCancelled(true);
         }
+    }
 
+    @Override
+    protected void ability() {
         player.sendMessage("Location saved, you'll be summoned back here in 3 seconds");
+
         Location location = player.getLocation();
         new BukkitRunnable() {
             @Override
@@ -72,17 +67,5 @@ public class Substitution extends MagicSpell implements Listener {
                 }.runTaskLater(plugin, 40);
             }
         }.runTaskLater(plugin, 60);
-    }
-
-    @EventHandler
-    private void onSubLogBreak(BlockBreakEvent event) {
-        if (event.getBlock().hasMetadata("SubstitutionLog")) {
-            event.setCancelled(true);
-        }
-    }
-
-    @Override
-    protected void ability() {
-
     }
 }

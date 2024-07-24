@@ -1,56 +1,74 @@
 package org.puggu.magicandskills.ability;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
+import org.puggu.magicandskills.managers.PlayerCooldownManager;
 import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
 public abstract class Ability {
-    protected final long cooldownTime;
-    protected double cost;
     protected final MagicAndSkills plugin;
-    protected final PlayerEnergyManager playerEnergyManager;
+    protected final Player player;
+    protected long cooldown;
+    protected final int cost;
+    protected final NamespacedKey abilityKey;
 
+    protected PlayerEnergyManager playerEnergyManager;
 
-    protected Ability(MagicAndSkills plugin, long cooldownTime, double cost) {
+    protected final PlayerCooldownManager playerCooldownManager = MagicAndSkills.getPlayerCooldownManager();
+
+    protected Ability(MagicAndSkills plugin, Player player, long cooldown, int cost, NamespacedKey abilityKey) {
         this.plugin = plugin;
         this.playerEnergyManager = new PlayerEnergyManager(plugin);
-        this.cooldownTime = cooldownTime;
+        this.cooldown = cooldown;
         this.cost = cost;
+        this.player = player;
+        this.abilityKey = abilityKey;
     }
 
-    private long lastUseTime = 0;
+//    private long lastUseTime = 0;
 
     public void setOnCooldown() {
-        lastUseTime = System.currentTimeMillis();
+//        cooldowns.put(player.getUniqueId(), System.currentTimeMillis());
+    }
+
+    public long getCooldown() {
+//        if (cooldowns.get(player.getUniqueId()) == null) {
+//            return -1;
+//        }
+
+//        return cooldowns.get(player.getUniqueId());
+        return -1L;
     }
 
     public boolean isOnCooldown() {
-        return timeSinceLastUsed() < cooldownTime;
+        return (System.currentTimeMillis() - getCooldown()) < cooldown;
     }
 
-    public long timeSinceLastUsed() {
-        return System.currentTimeMillis() - lastUseTime;
-    }
 
     /**
      * The ability's main process
-//     * @return whether the ability should be cast or not
      */
     protected abstract void ability();
 
     /**
-     * Deplete player resource (Mana/Energy/Stamina)
+     * Deplete player resource (Mana/Stamina)
      */
-    public abstract void depleteResource(Player player, Double amount);
+    protected abstract void depleteResource(Player player, int amount);
 
     /**
-     * Get user Mana/Energy/Ki/Stamina
+     * Increments player resource (Mana/Stamina)
+     */
+    protected abstract void incrementResource(Player player, int amount);
+
+    /**
+     * Get user Mana/Stamina
      * @return whether there's enough energy
      */
-    public abstract boolean enoughResource(Player player, Double cost);
+    public abstract boolean enoughResource(Player player, int cost);
 
     /**
      * Implemented by MagicSpell/Skill's uniquely to handle cast fails for different reasons
@@ -63,27 +81,31 @@ public abstract class Ability {
      * Checks if player has resources and if ability is on cooldown
      * Depletes resource, calls ability, sets ability on cooldown
      * requests update for action bar
-     * @param player entity
      */
-    public void executeAbility(Player player) {
-        if (!enoughResource(player, cost)) {
-            failedToCast(player, ReasonForCastFail.NOT_ENOUGH_ENERGY);
-            return;
-        }
-        if (isOnCooldown()) {
-            failedToCast(player, ReasonForCastFail.COOLDOWN);
-            return;
-        }
+    public void executeAbility() {
+//        if (!enoughResource(player, cost)) {
+//            failedToCast(player, ReasonForCastFail.NOT_ENOUGH_ENERGY);
+//            return;
+//        }
+//        if (isOnCooldown(player)) {
+//            player.sendMessage("Cooldown: " + getCooldown(player));
+//            failedToCast(player, ReasonForCastFail.COOLDOWN);
+//            return;
+//        }
 
         // Successful cast
         player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1f, 1f);
-        depleteResource(player, cost);
+//        depleteResource(player, cost);
         ability();
-        setOnCooldown();
+//        setOnCooldown();
 
-        Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
+//        Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
 //        DisplayActionBarSchedule.updateEnergyBar(player,
 //                playerEnergyManager.getPlayerMana(player),
 //                playerEnergyManager.getPlayerStamina(player));
+    }
+
+    public NamespacedKey getAbilityKey(){
+        return abilityKey;
     }
 }

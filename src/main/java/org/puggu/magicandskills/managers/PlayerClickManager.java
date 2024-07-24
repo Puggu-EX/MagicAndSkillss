@@ -1,21 +1,61 @@
 package org.puggu.magicandskills.managers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.persistence.PersistentDataType;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
 import org.puggu.magicandskills.clicks.CastClick;
 import org.puggu.magicandskills.clicks.PlayerClick;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class PlayerClickManager {
+/**
+ * Captures player clicks and add them to a hashmap with their UUID as the key.
+ * If a sequence of clicks (3) are captured within the set time frame, the
+ * sequence is sent to the PlayerCastManager
+ */
+public class PlayerClickManager implements Listener {
     private final MagicAndSkills plugin;
+    private final int sequenceLength = 3; // A spell is a sequence of X clicks
+    PlayerCastManager castManager;
 
-    private static final HashMap<UUID, List<PlayerClick>> playerClicks = new HashMap<>();
+    private static final ConcurrentHashMap<UUID, List<PlayerClick>> playerClicks = new ConcurrentHashMap<>();
 
     public PlayerClickManager(MagicAndSkills plugin) {
         this.plugin = plugin;
+        this.castManager = new PlayerCastManager(plugin);
+    }
+
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        // Only handle if player is using a stick with a PDC containing "wand-type" in main hand
+        if (!event.hasItem() ||
+                Objects.requireNonNull(event.getItem()).getType() != Material.STICK ||
+                event.getHand() != EquipmentSlot.HAND ||
+                !Objects.requireNonNull(event.getItem().getItemMeta()).getPersistentDataContainer().has(
+                        new NamespacedKey(plugin, "wand-type"), PersistentDataType.STRING)) {
+            return;
+        }
+
+//        Player player = event.getPlayer();
+//        Action action = event.getAction();
+
+        CastClick actionAsClick = event.getAction().toString().contains("LEFT") ? CastClick.LEFT : CastClick.RIGHT;
+//        CastClick actionAsClick = action.toString().contains("LEFT") ? CastClick.LEFT : CastClick.RIGHT;
+
+        addClick(event.getPlayer(), actionAsClick);
+//        addClick(player, actionAsClick);
+
+//        event.setCancelled(true);
     }
 
     public void clearClicks(Player player) {
@@ -25,29 +65,17 @@ public class PlayerClickManager {
     public void addClick(Player player, CastClick click) {
         List<PlayerClick> clicks = getPlayerClicks(player);
 
-        if (clicks == null || clicks.size() >= 3 || System.currentTimeMillis() - clicks.getLast().getTime() > 1000) {
-//            player.sendMessage("Invalid click sequence detected, creating new list");
+        if (clicks == null || clicks.size() >= sequenceLength || System.currentTimeMillis() - clicks.getLast().getTime() > 1000) {
             clicks = new ArrayList<>();
         }
 
-//        System.out.println("Putting: " + click.toString());
         clicks.add(new PlayerClick(click, System.currentTimeMillis()));
         playerClicks.put(player.getUniqueId(), clicks);
 
 
-//        StringBuilder s = new StringBuilder();
-//        for (PlayerClick pc : clicks) {
-//            CastClick c = pc.getClick();
-//            s.append("(").append(c.toString()).append(" ").append(pc.getTime()).append(")");
-//        }
-//        System.out.println("Current Cast Sequence: " + s);
-
-//        System.out.println("Sending UpdateActionBarEvent");
         Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
-        if (clicks.size() == 3) {
-            // Call EventManager/CastManager to handle spell execution
-//            player.sendMessage("Attempting to Cast: " + getCastSequenceAsString(player));
-            PlayerCastManager castManager = new PlayerCastManager(plugin);
+
+        if (clicks.size() == sequenceLength) {
             castManager.castHandler(player, getCastSequenceAsString(player));
             clearClicks(player);
         }
@@ -55,16 +83,6 @@ public class PlayerClickManager {
     }
 
     public List<PlayerClick> getPlayerClicks(Player player) {
-//        List<PlayerClick> clicks = playerClicks.get(player.getUniqueId());
-//        if (clicks != null) {
-//            StringBuilder message = new StringBuilder();
-//            for (PlayerClick click : clicks) {
-//                String s = (click.getClick() == CastClick.LEFT) ? "left" : "right";
-//                message.append(s);
-//            }
-//            player.sendMessage("From PCM: " + message);
-//        }
-//        return clicks;
         return playerClicks.get(player.getUniqueId());
     }
 

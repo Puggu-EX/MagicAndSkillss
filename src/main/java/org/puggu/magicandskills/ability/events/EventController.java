@@ -16,32 +16,32 @@ import org.puggu.magicandskills.managers.PlayerClickManager;
 import java.util.*;
 
 public class EventController implements Listener {
-    private final PlayerClickManager playerClickManager;
+//    private final PlayerClickManager playerClickManager;
 
-    private final MagicAndSkills plugin;
-    public EventController(MagicAndSkills plugin) {
-        this.plugin = plugin;
-        this.playerClickManager = new PlayerClickManager(plugin);
-    }
-
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        // Only handle if player is using a stick with a PDC containing "wand-type" in main hand
-        if (!event.hasItem() ||
-                Objects.requireNonNull(event.getItem()).getType() != Material.STICK ||
-                event.getHand() != EquipmentSlot.HAND ||
-                !Objects.requireNonNull(event.getItem().getItemMeta()).getPersistentDataContainer().has(
-                        new NamespacedKey(plugin, "wand-type"), PersistentDataType.STRING)) {
-            return;
-        }
-
-        Player player = event.getPlayer();
-        Action action = event.getAction();
-
-        CastClick actionAsClick = action.toString().contains("LEFT") ? CastClick.LEFT : CastClick.RIGHT;
-
-        playerClickManager.addClick(player, actionAsClick);
-
-        event.setCancelled(true);
-    }
+//    private final MagicAndSkills plugin;
+//    public EventController(MagicAndSkills plugin) {
+//        this.plugin = plugin;
+//        this.playerClickManager = new PlayerClickManager(plugin);
+//    }
+//
+//    @EventHandler
+//    public void onPlayerInteract(PlayerInteractEvent event) {
+//        // Only handle if player is using a stick with a PDC containing "wand-type" in main hand
+//        if (!event.hasItem() ||
+//                Objects.requireNonNull(event.getItem()).getType() != Material.STICK ||
+//                event.getHand() != EquipmentSlot.HAND ||
+//                !Objects.requireNonNull(event.getItem().getItemMeta()).getPersistentDataContainer().has(
+//                        new NamespacedKey(plugin, "wand-type"), PersistentDataType.STRING)) {
+//            return;
+//        }
+//
+//        Player player = event.getPlayer();
+//        Action action = event.getAction();
+//
+//        CastClick actionAsClick = action.toString().contains("LEFT") ? CastClick.LEFT : CastClick.RIGHT;
+//
+//        playerClickManager.addClick(player, actionAsClick);
+//
+//        event.setCancelled(true);
+//    }
 }

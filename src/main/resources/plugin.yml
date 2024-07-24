@@ -12,3 +12,6 @@ commands:
   suicide:
     description: "kys menu"
     usage: /<command>
+  spell:
+    description: "learn ability"
+    usage: /<command> [learn | forget] [spell]

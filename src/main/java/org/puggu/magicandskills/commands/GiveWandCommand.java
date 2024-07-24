@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.item.wand.WandTagger;
+import org.puggu.magicandskills.item.tagger.WandTagger;
 import org.puggu.magicandskills.item.wand.WandType;
 
 

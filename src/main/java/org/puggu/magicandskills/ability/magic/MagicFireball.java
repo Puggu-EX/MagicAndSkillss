@@ -1,5 +1,6 @@
 package org.puggu.magicandskills.ability.magic;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Fireball;
@@ -10,22 +11,14 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.ability.events.FireballEvent;
 
 
-public class MagicFireball extends MagicSpell implements Listener {
+public class MagicFireball extends Spell implements Listener {
 
-    private Player player;
-
-    public MagicFireball(MagicAndSkills plugin) {
-        super(plugin, 2000, 10);
+    public MagicFireball(MagicAndSkills plugin, Player player) {
+        super(plugin, player, 2000, 10, new NamespacedKey(plugin, "MagicFireball"));
     }
 
-    @EventHandler
-    public void use(FireballEvent event) {
-        this.player = event.getPlayer();
-        executeAbility(event.getPlayer());
-    }
 
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event){

@@ -36,14 +36,14 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
         }
     }
 
-    public void updateEnergyBar(Player player, Double mana, Double stamina) {
+    public void updateEnergyBar(Player player, int mana, int stamina) {
         String actionBarMessage = ChatColor.AQUA + "Mana: " + mana + "/100" +
                 ChatColor.WHITE + " | " + ChatColor.WHITE + "# - # - #" + ChatColor.GREEN + " | " +
                 ChatColor.YELLOW + "Stamina: " + stamina + "/100";
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(actionBarMessage));
     }
 
-    public void updateEnergyBar(Player player, Double mana, Double stamina, String clicks) {
+    public void updateEnergyBar(Player player, int mana, int stamina, String clicks) {
         // Fill the rest of the list with '#'s
 
         StringBuilder clicksBuilder = new StringBuilder(clicks);
@@ -89,10 +89,5 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
 //            playerClickManager.clearClicks(player);
         }
     }
-
-    private ActionBarType actionBarType(Player player) {
-        return ActionBarType.WIZARD;
-    }
-
 }
 

@@ -1,4 +1,4 @@
-package org.puggu.magicandskills.item.wand;
+package org.puggu.magicandskills.item.tagger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,6 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.puggu.magicandskills.MagicAndSkills;
+import org.puggu.magicandskills.item.wand.WandType;
 
 import java.util.ArrayList;
 import java.util.List;

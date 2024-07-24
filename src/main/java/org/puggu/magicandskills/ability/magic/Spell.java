@@ -1,23 +1,23 @@
 package org.puggu.magicandskills.ability.magic;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.Ability;
 import org.puggu.magicandskills.ability.ReasonForCastFail;
 
-public abstract class MagicSpell extends Ability {
+public abstract class Spell extends Ability {
+    private final int manaCost;
 
-    private final Double manaCost;
-    protected MagicSpell(MagicAndSkills plugin, long cooldownTime, double manaCost) {
-        super(plugin, cooldownTime, manaCost);
+    protected Spell(MagicAndSkills plugin, Player player, long cooldownTime, int manaCost, NamespacedKey abilityKey) {
+        super(plugin, player,  cooldownTime, manaCost, abilityKey);
         this.manaCost = manaCost;
     }
 
-    public Double getManaCost() {
+    public int getManaCost() {
         return manaCost;
     }
-
 
     @Override
     public void failedToCast(Player player, ReasonForCastFail reason){
@@ -32,14 +32,21 @@ public abstract class MagicSpell extends Ability {
     }
 
     @Override
-    public void depleteResource(Player player, Double amount) {
-        if (playerEnergyManager.playerHasEnergyContainers(player)){
+    public void depleteResource(Player player, int amount) {
+        if (playerEnergyManager.hasEnergyContainers(player)){
             playerEnergyManager.incrementPlayerMana(player, -amount);
         }
     }
 
     @Override
-    public boolean enoughResource(Player player, Double cost) {
+    public void incrementResource(Player player, int amount) {
+        if (playerEnergyManager.hasEnergyContainers(player)){
+            playerEnergyManager.incrementPlayerMana(player, -amount);
+        }
+    }
+
+    @Override
+    public boolean enoughResource(Player player, int cost) {
         return playerEnergyManager.getPlayerMana(player) > cost;
     }
 }
