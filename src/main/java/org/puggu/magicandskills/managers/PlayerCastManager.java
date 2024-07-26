@@ -56,36 +56,5 @@ public class PlayerCastManager {
                 // Something went wrong
                 break;
         }
-
-//        switch (castSequence) {
-//            case "LLL":
-//                player.sendMessage("Fireball");
-//                new MagicFireball(plugin, player).executeAbility();
-//                break;
-//            case "RRR":
-//                player.sendMessage("Substitution");
-//                new Substitution(plugin, player).executeAbility();
-//                break;
-//            case "LRR":
-//                player.sendMessage("Arrow Storm");
-//                Bukkit.getServer().getPluginManager().callEvent(new ArrowStormEvent(player));
-//                break;
-//            case "RRR":
-//                player.sendMessage("Substitution");
-//                Substitution substitution = new Substitution(plugin, player);
-//                Bukkit.getServer().getPluginManager().registerEvents(substitution, plugin);
-//                SubstitutionEvent event = new SubstitutionEvent(player);
-//                Bukkit.getServer().getPluginManager().callEvent(event);
-//                event.getHandlers().unregister(substitution);
-//                break;
-//            case "RRL":
-//                player.sendMessage("Fireball");
-//                Bukkit.getServer().getPluginManager().callEvent(new FireballEvent(player));
-//                break;
-//            case "RLL":
-//                player.sendMessage("Arrow Volley");
-//                Bukkit.getServer().getPluginManager().callEvent(new ArrowVolleyEvent(player));
-//                break;
-        // }
     }
 }

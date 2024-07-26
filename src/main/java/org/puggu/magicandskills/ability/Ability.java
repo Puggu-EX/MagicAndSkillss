@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
+import org.puggu.magicandskills.ability.experience.ExperienceUtil;
 import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
 import org.puggu.magicandskills.managers.PlayerCooldownManager;
 import org.puggu.magicandskills.managers.PlayerEnergyManager;
@@ -16,13 +17,8 @@ public abstract class Ability {
     protected final int cost;
     protected final NamespacedKey abilityKey;
 
-    protected PlayerEnergyManager playerEnergyManager;
-
-    protected final PlayerCooldownManager playerCooldownManager = MagicAndSkills.getPlayerCooldownManager();
-
     protected Ability(MagicAndSkills plugin, Player player, long cooldown, int cost, NamespacedKey abilityKey) {
         this.plugin = plugin;
-        this.playerEnergyManager = new PlayerEnergyManager(plugin);
         this.cooldown = cooldown;
         this.cost = cost;
         this.player = player;
@@ -57,18 +53,25 @@ public abstract class Ability {
     /**
      * Deplete player resource (Mana/Stamina)
      */
-    protected abstract void depleteResource(Player player, int amount);
+    protected void depleteResource(Player player, int amount){
+        player.giveExp(-amount);
+    }
 
     /**
      * Increments player resource (Mana/Stamina)
      */
-    protected abstract void incrementResource(Player player, int amount);
+    protected void incrementResource(Player player, int amount){
+        player.giveExp(amount);
+    }
 
     /**
      * Get user Mana/Stamina
      * @return whether there's enough energy
      */
-    public abstract boolean enoughResource(Player player, int cost);
+    public boolean enoughResource(Player player, int cost){
+        player.sendMessage(player.getLevel() + " | " + player.getExp());
+        return ExperienceUtil.calculateTotalXP(player.getLevel(), player.getExp()) >= cost;
+    }
 
     /**
      * Implemented by MagicSpell/Skill's uniquely to handle cast fails for different reasons
@@ -83,19 +86,15 @@ public abstract class Ability {
      * requests update for action bar
      */
     public void executeAbility() {
-//        if (!enoughResource(player, cost)) {
-//            failedToCast(player, ReasonForCastFail.NOT_ENOUGH_ENERGY);
-//            return;
-//        }
-//        if (isOnCooldown(player)) {
-//            player.sendMessage("Cooldown: " + getCooldown(player));
-//            failedToCast(player, ReasonForCastFail.COOLDOWN);
-//            return;
-//        }
+        player.sendMessage(cost + " " + ExperienceUtil.calculateTotalXP(player.getLevel(), player.getExp()));
+        if (!enoughResource(player, cost)) {
+            failedToCast(player, ReasonForCastFail.NOT_ENOUGH_ENERGY);
+            return;
+        }
 
         // Successful cast
         player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1f, 1f);
-//        depleteResource(player, cost);
+        depleteResource(player, cost);
         ability();
 //        setOnCooldown();
 

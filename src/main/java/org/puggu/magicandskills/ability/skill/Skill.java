@@ -14,23 +14,23 @@ public abstract class Skill extends Ability {
         this.staminaCost = staminaCost;
     }
 
-    @Override
-    public void depleteResource(Player player, int amount) {
-        if (playerEnergyManager.hasEnergyContainers(player)){
-            playerEnergyManager.incrementPlayerStamina(player, -amount);
-        }
-    }
-
-    @Override
-    protected void incrementResource(Player player, int amount) {
-        return;
-    }
-
-    @Override
-    public boolean enoughResource(Player player, int cost) {
-        double availableStamina = playerEnergyManager.getPlayerStamina(player);
-        return availableStamina > cost;
-    }
+//    @Override
+//    public void depleteResource(Player player, int amount) {
+//        if (playerEnergyManager.hasEnergyContainers(player)){
+//            playerEnergyManager.incrementPlayerStamina(player, -amount);
+//        }
+//    }
+//
+//    @Override
+//    protected void incrementResource(Player player, int amount) {
+//        return;
+//    }
+//
+//    @Override
+//    public boolean enoughResource(Player player, int cost) {
+//        double availableStamina = playerEnergyManager.getPlayerStamina(player);
+//        return availableStamina > cost;
+//    }
 
     @Override
     public void failedToCast(Player player, ReasonForCastFail reason) {

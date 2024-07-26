@@ -8,13 +8,14 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.HashMap;
 
 public class PlayerProgressionManager implements Listener {
+    // A magic sequence is 5 clicks. 2 options for each click. 32 different combinations.
     private final HashMap<String, String> spellSequences = new HashMap<>(32);
 
     public PlayerProgressionManager() {
         // In the future the spells and their sequences will be stored in a document and initialized
         // in the onEnable() function.
-        spellSequences.put("LLL", "MagicFireball");
-        spellSequences.put("RRR", "Substitution");
+        spellSequences.put("LLLLL", "MagicFireball");
+        spellSequences.put("RRRRR", "Substitution");
     }
 
     public void playerLearnAbility(Player player, NamespacedKey abilityKey){
@@ -57,10 +58,8 @@ public class PlayerProgressionManager implements Listener {
         }
 
         if (playerLearnedAbility(player, spellSequences.get(sequence))){
-            System.out.println("Does know");
             return spellSequences.get(sequence);
         }
-        System.out.println("Doesnt know");
 
         return "FAIL";
     }

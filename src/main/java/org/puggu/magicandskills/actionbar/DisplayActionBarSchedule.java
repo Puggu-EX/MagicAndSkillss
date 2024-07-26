@@ -43,21 +43,26 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(actionBarMessage));
     }
 
-    public void updateEnergyBar(Player player, int mana, int stamina, String clicks) {
+    public void updateEnergyBar(Player player, String clicks) {
         // Fill the rest of the list with '#'s
-
         StringBuilder clicksBuilder = new StringBuilder(clicks);
-        while (clicksBuilder.length() < 3) {
+        while (clicksBuilder.length() < 5) {
             clicksBuilder.append("#");
         }
         clicks = clicksBuilder.toString();
-//        clicks = playerClickManager.getCastSequenceAsString(player);
 
-        String middle = clicks.charAt(0) + " - " + clicks.charAt(1) + " - " + clicks.charAt(2);
-        String actionBarMessage = ChatColor.AQUA + "Mana: " + mana + "/100" +
-                ChatColor.GREEN + " | " + ChatColor.WHITE + middle + ChatColor.GREEN + " | " +
-                ChatColor.YELLOW + "Stamina: " + stamina + "/100";
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(actionBarMessage));
+        clicksBuilder = new StringBuilder();
+
+        for (int i = 0; i < 5; i++) {
+            clicksBuilder.append(clicks.charAt(i));
+            if (i < 4) {
+                clicksBuilder.append(" - ");
+            }
+        }
+
+        clicks = clicksBuilder.toString();
+
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(clicks));
     }
 
     @EventHandler
@@ -74,7 +79,10 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
 //        System.out.println("Clicks in Handler " + s);
 
         Player player = event.getPlayer();
-        updateEnergyBar(player, playerEnergyManager.getPlayerMana(player), playerEnergyManager.getPlayerStamina(player), playerClickManager.getCastSequenceAsString(player));
+        updateEnergyBar(player,
+//                playerEnergyManager.getPlayerMana(player),
+//                playerEnergyManager.getPlayerStamina(player),
+                playerClickManager.getCastSequenceAsString(player));
     }
 
     @Override

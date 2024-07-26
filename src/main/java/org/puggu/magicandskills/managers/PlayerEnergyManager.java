@@ -84,19 +84,4 @@ public class PlayerEnergyManager {
             playerContainer.set(staminaKey, PersistentDataType.INTEGER, stamina);
         }
     }
-
-
-    public static int getTotalXP(int level, int points) {
-        int totalXP = 0;
-
-        if (level <= 16) {
-            totalXP = (level * level + 6 * level) / 2;
-        } else if (level <= 31) {
-            totalXP = (5 * level * level - 81 * level + 720) / 2;
-        } else {
-            totalXP = (9 * level * level - 325 * level + 2220) / 2;
-        }
-
-        return totalXP + points;
-    }
 }

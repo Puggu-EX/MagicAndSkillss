@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PlayerClickManager implements Listener {
     private final MagicAndSkills plugin;
-    private final int sequenceLength = 3; // A spell is a sequence of X clicks
+    private final int sequenceLength = 5; // A spell is a sequence of X clicks
     PlayerCastManager castManager;
 
     private static final ConcurrentHashMap<UUID, List<PlayerClick>> playerClicks = new ConcurrentHashMap<>();
@@ -100,7 +100,7 @@ public class PlayerClickManager implements Listener {
 
         // no clicks or last click was longer than a second ago
         if (clicks == null || System.currentTimeMillis() - clicks.getLast().getTime() > 1000) {
-            return "###";
+            return "#####";
         }
 
         StringBuilder castClicks = new StringBuilder();

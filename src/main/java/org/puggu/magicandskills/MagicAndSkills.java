@@ -44,8 +44,8 @@ public final class MagicAndSkills extends JavaPlugin {
         DisplayActionBarSchedule displayActionBarSchedule = new DisplayActionBarSchedule(this);
         actionBarTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, displayActionBarSchedule, 0L, 20L);
 
-        EnergyRegenScheduler energyRegenScheduler = new EnergyRegenScheduler(this);
-        energyRegenTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, energyRegenScheduler, 0L, 20L);
+//        EnergyRegenScheduler energyRegenScheduler = new EnergyRegenScheduler(this);
+//        energyRegenTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, energyRegenScheduler, 0L, 20L);
 
         playerCooldownManager = new PlayerCooldownManager(this);
     }
