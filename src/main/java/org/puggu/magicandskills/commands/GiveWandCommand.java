@@ -36,7 +36,7 @@ public class GiveWandCommand implements CommandExecutor {
 //                itemMeta.getPersistentDataContainer();
 //                wand.setItemMeta(itemMeta);
                 ItemStack wand = new ItemStack(Material.STICK);
-                tagger.setTypeOfWand(wand, WandType.FIRE);
+                tagger.setTypeOfWand(wand, WandType.GENERIC);
 //                inventory.addItem(new FireWand(plugin).getWand());
                 inventory.addItem(wand);
             }

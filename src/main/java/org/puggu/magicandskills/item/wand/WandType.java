@@ -1,25 +1,14 @@
 package org.puggu.magicandskills.item.wand;
 
 public enum WandType {
-    FIRE(){
-        @Override
-        void handleSpell() {
-
-        }
+    FIRE() {
     },
-    LIGHTNING(){
-        @Override
-        void handleSpell() {
-
-        }
+    LIGHTNING() {
     },
-    WATER(){
-        @Override
-        void handleSpell() {
-
-        }
+    WATER() {
+    },
+    GENERIC() {
     };
 
 
-    abstract void handleSpell();
 }

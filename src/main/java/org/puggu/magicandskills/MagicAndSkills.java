@@ -6,6 +6,7 @@ import org.puggu.magicandskills.commands.GiveWandCommand;
 import org.puggu.magicandskills.actionbar.DisplayActionBarSchedule;
 import org.puggu.magicandskills.commands.LearnAbility;
 import org.puggu.magicandskills.commands.SuicideCommand;
+import org.puggu.magicandskills.genericlisteners.PlayerItemSwapListener;
 import org.puggu.magicandskills.genericlisteners.ProjectileHitListener;
 import org.puggu.magicandskills.managers.EnergyRegenScheduler;
 import org.puggu.magicandskills.genericlisteners.MenuListener;
@@ -31,6 +32,7 @@ public final class MagicAndSkills extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new MenuListener(), this);
         this.getServer().getPluginManager().registerEvents(new ProjectileHitListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerItemSwapListener(), this);
 
         this.getServer().getPluginManager().registerEvents(new OnPlayerJoinInit(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerClickManager(this), this);

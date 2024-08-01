@@ -4,15 +4,18 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
 import org.puggu.magicandskills.managers.PlayerClickManager;
 import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DisplayActionBarSchedule implements Runnable, Listener {
 
@@ -67,17 +70,6 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
 
     @EventHandler
     public void handler(UpdateActionBarEvent event) {
-//        String clicks = playerClickManager.getCastSequenceAsString(event.getPlayer());
-//        List<PlayerClick> clicks = playerClickManager.playerClicks.get(event.getPlayer());
-
-//        StringBuilder s = new StringBuilder();
-//        for (PlayerClick pc : clicks) {
-//            CastClick c = pc.getClick();
-//            s.append("(").append(c.toString()).append(" ").append(pc.getTime()).append(")");
-//        }
-//        System.out.println("Handling UpdateActionBarEvent");
-//        System.out.println("Clicks in Handler " + s);
-
         Player player = event.getPlayer();
         updateEnergyBar(player,
 //                playerEnergyManager.getPlayerMana(player),
@@ -85,16 +77,35 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
                 playerClickManager.getCastSequenceAsString(player));
     }
 
+    @EventHandler
+    public void handler(ClearActionBarEvent event) {
+        event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(""));
+    }
+
     @Override
     public void run() {
+        // Change this so that instead of:
+        // cycling through a list of all players
+        // We instead:
+        // update the action bar for every player in a given list. Players are added and removed from
+        // this list when they switch to a wand.
+
+        // "Cycling through every player and checking if they're holding a wand"
+        // vs
+        // "Every time a player switches items, if it's a wand, add them to the list"
+
+
         for (Player player : Bukkit.getOnlinePlayers()) {
 //            double mana = playerEnergyManager.getPlayerMana(player);
 //            double stamina = playerEnergyManager.getPlayerStamina(player);
 //            String clicks = playerClickManager.getCastSequenceAsString(player);
-
 //            updateEnergyBar(player, mana, stamina, clicks);
-            Bukkit.getPluginManager().callEvent(new UpdateActionBarEvent(player));
-//            playerClickManager.clearClicks(player);
+
+            ItemStack item = player.getInventory().getItemInMainHand();
+
+            if (item.getType() == Material.STICK && Objects.requireNonNull(item.getItemMeta()).hasItemFlag(ItemFlag.HIDE_ENCHANTS)) {
+                Bukkit.getPluginManager().callEvent(new UpdateActionBarEvent(player));
+            }
         }
     }
 }
