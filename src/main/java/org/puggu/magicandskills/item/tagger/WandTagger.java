@@ -3,6 +3,8 @@ package org.puggu.magicandskills.item.tagger;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -17,12 +19,12 @@ import java.util.List;
  * Taken from 7smile7 on spigotmc.org
  */
 public class WandTagger {
-    private final NamespacedKey wandTypeKey;
+    private NamespacedKey wandTypeKey;
 
     public WandTagger(MagicAndSkills plugin) {
-        this.wandTypeKey = new NamespacedKey(plugin, "wand-type");
+        wandTypeKey = new NamespacedKey(plugin, "wand-type");
     }
-
+    
     public void setTypeOfWand(ItemStack item, WandType type){
         ItemMeta meta = item.getItemMeta();
         if (meta == null){
@@ -49,12 +51,20 @@ public class WandTagger {
                 lore.add("This wand gives you the power");
                 lore.add("to cast water spells");
                 break;
+            case GENERIC:
+                meta.setDisplayName("Magic Wand");
+//                lore.add(ChatColor.GRAY + "Magic Fireball I");
+//                lore.add(ChatColor.GRAY + "Substitution I");
+                break;
         }
 
         meta.setLore(lore);
+        meta.addEnchant(Enchantment.LUCK, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         PersistentDataContainer container = meta.getPersistentDataContainer();
         container.set(this.wandTypeKey, PersistentDataType.STRING, type.toString());
+
         item.setItemMeta(meta);
     }
 

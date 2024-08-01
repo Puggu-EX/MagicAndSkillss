@@ -1,14 +1,10 @@
 package org.puggu.magicandskills.ability;
 
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.experience.ExperienceUtil;
-import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
-import org.puggu.magicandskills.managers.PlayerCooldownManager;
-import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
 public abstract class Ability {
     protected final MagicAndSkills plugin;

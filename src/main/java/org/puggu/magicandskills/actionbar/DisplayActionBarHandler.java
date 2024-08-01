@@ -4,7 +4,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.puggu.magicandskills.MagicAndSkills;
-import org.puggu.magicandskills.ability.events.UpdateActionBarEvent;
 import org.puggu.magicandskills.managers.PlayerClickManager;
 import org.puggu.magicandskills.managers.PlayerEnergyManager;
 
