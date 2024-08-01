@@ -3,6 +3,7 @@ package org.puggu.magicandskills.managers;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -70,6 +71,8 @@ public class PlayerClickManager implements Listener {
 
         clicks.add(new PlayerClick(click, System.currentTimeMillis()));
         playerClicks.put(player.getUniqueId(), clicks);
+
+        player.playSound(player, Sound.BLOCK_LEVER_CLICK, .5f, 1f);
 
 
         Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
