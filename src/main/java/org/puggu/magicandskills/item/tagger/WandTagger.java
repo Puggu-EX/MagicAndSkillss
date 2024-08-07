@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.puggu.magicandskills.MagicAndSkills;
+import org.puggu.magicandskills.item.wand.WandEnchant;
 import org.puggu.magicandskills.item.wand.WandType;
 
 import java.util.ArrayList;
@@ -80,6 +81,22 @@ public class WandTagger {
             return null;
         }
         return WandType.valueOf(typeValue);
+    }
+
+    public void enchantWand(ItemStack wand, WandEnchant enchant){
+        List<String> lore;
+        if (wand.hasItemMeta() && wand.getItemMeta().hasLore()){
+            lore = wand.getItemMeta().getLore();
+        }else{
+            lore = new ArrayList<>();
+        }
+
+        if (lore == null){
+            return;
+        }
+
+        lore.add(enchant.asString());
+        wand.getItemMeta().setLore(lore);
     }
 
     public ItemStack getWand(){
