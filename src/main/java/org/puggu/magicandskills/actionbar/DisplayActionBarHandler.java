@@ -24,7 +24,7 @@ public class DisplayActionBarHandler implements Listener {
     @EventHandler
     public void handler(UpdateActionBarEvent event) {
         Player player = event.getPlayer();
-        displayActionBarSchedule.updateEnergyBar(player,
+        displayActionBarSchedule.updateCastSequenceBar(player,
 //                playerEnergyManager.getPlayerMana(player),
 //                playerEnergyManager.getPlayerStamina(player),
                 playerClickManager.getCastSequenceAsString(player));

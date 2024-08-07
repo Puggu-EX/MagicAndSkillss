@@ -39,14 +39,14 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
         }
     }
 
-    public void updateEnergyBar(Player player, int mana, int stamina) {
+    public void updateCastSequenceBar(Player player, int mana, int stamina) {
         String actionBarMessage = ChatColor.AQUA + "Mana: " + mana + "/100" +
                 ChatColor.WHITE + " | " + ChatColor.WHITE + "# - # - #" + ChatColor.GREEN + " | " +
                 ChatColor.YELLOW + "Stamina: " + stamina + "/100";
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(actionBarMessage));
     }
 
-    public void updateEnergyBar(Player player, String clicks) {
+    public void updateCastSequenceBar(Player player, String clicks) {
         // Fill the rest of the list with '#'s
         StringBuilder clicksBuilder = new StringBuilder(clicks);
         while (clicksBuilder.length() < 5) {
@@ -71,7 +71,7 @@ public class DisplayActionBarSchedule implements Runnable, Listener {
     @EventHandler
     public void handler(UpdateActionBarEvent event) {
         Player player = event.getPlayer();
-        updateEnergyBar(player,
+        updateCastSequenceBar(player,
 //                playerEnergyManager.getPlayerMana(player),
 //                playerEnergyManager.getPlayerStamina(player),
                 playerClickManager.getCastSequenceAsString(player));
