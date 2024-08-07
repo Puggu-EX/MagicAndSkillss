@@ -12,6 +12,8 @@ Incorporate an ability system that
 * Choose between an enchanter system vs caster system 
   * Caster: The spells belong to the casters. They can use any wand as a medium
   * Enchantment: The spells belong to the wands. Casters can only use spells the wand contains
+* Update how spells are handled in the backend (learning/storing)
+* Spell learning/discovery
 * Different wands
 * Particle system
 * Custom armor enchantments
