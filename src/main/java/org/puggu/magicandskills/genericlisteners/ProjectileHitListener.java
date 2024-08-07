@@ -28,12 +28,12 @@ public class ProjectileHitListener implements Listener {
     @EventHandler
     public void onProjectileHit(final ProjectileHitEvent event) {
 
-        Set<NamespacedKey> keys = event.getEntity().getPersistentDataContainer().getKeys();
+//        Set<NamespacedKey> keys = event.getEntity().getPersistentDataContainer().getKeys();
 
-        for (NamespacedKey key : keys) {
-            if (!key.getKey().equals("summoned-arrow"))
-                return;
-        }
+//        for (NamespacedKey key : keys) {
+//            if (!key.getKey().equals("summoned-arrow"))
+//                return;
+//        }
 
         if (event.getHitEntity() != null) {
             despawn.despawnEffectOnHit(event.getEntity());
