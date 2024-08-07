@@ -21,7 +21,7 @@ import java.util.Objects;
 public final class MagicAndSkills extends JavaPlugin {
 
     private int actionBarTask;
-    private int energyRegenTask;
+//    private int energyRegenTask;
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
@@ -73,6 +73,6 @@ public final class MagicAndSkills extends JavaPlugin {
     @Override
     public void onDisable() {
         this.getServer().getScheduler().cancelTask(actionBarTask);
-        this.getServer().getScheduler().cancelTask(energyRegenTask);
+//        this.getServer().getScheduler().cancelTask(energyRegenTask);
     }
 }

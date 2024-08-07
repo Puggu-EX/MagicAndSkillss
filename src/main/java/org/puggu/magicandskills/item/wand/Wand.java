@@ -12,15 +12,15 @@ import org.puggu.magicandskills.MagicAndSkills;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Wand {
+public abstract class Wand extends ItemStack {
 
-//    private final ItemStack wand = new ItemStack(Material.STICK);
-//    public Wand(MagicAndSkills plugin, WandType type, String wandName){
+    private final ItemStack wand = new ItemStack(Material.STICK);
+
+    public Wand(MagicAndSkills plugin, WandType type, String wandName){
 //        this.wandTypeKey = new NamespacedKey(plugin, "wand-type");
 //        this.wandType = type;
 //        this.wandName = wandName;
-////        createWand();
-//    }
-
+//        createWand();
+    }
 }
 
