@@ -2,12 +2,14 @@ package org.puggu.magicandskills.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.events.*;
 import org.puggu.magicandskills.ability.magic.MagicFireball;
+import org.puggu.magicandskills.ability.skill.ArrowGatling;
 import org.puggu.magicandskills.ability.skill.Substitution;
 
 /**
@@ -49,8 +51,13 @@ public class PlayerCastManager {
                 Substitution substitution = new Substitution(plugin, player);
                 substitution.executeAbility();
                 break;
+            case "ArrowGatling":
+                ArrowGatling arrowGatling = new ArrowGatling(plugin, player);
+                arrowGatling.executeAbility();
+                break;
             case "FAIL":
-                player.sendMessage("No spell tied to this sequence");
+//                player.sendMessage("No spell tied to this sequence");
+                player.playSound(player, Sound.ITEM_SHIELD_BREAK, .25f, 1f);
                 break;
             default:
                 // Something went wrong

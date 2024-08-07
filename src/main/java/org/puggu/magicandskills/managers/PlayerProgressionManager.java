@@ -15,7 +15,9 @@ public class PlayerProgressionManager implements Listener {
         // In the future the spells and their sequences will be stored in a document and initialized
         // in the onEnable() function.
         spellSequences.put("LLLLL", "MagicFireball");
+        spellSequences.put("LLLLR", "ArrowGatling");
         spellSequences.put("RRRRR", "Substitution");
+//        spellSequences.put("LLLRR", "Bind");
     }
 
     public void playerLearnAbility(Player player, NamespacedKey abilityKey){
@@ -51,9 +53,8 @@ public class PlayerProgressionManager implements Listener {
     }
 
     public String getSpell(Player player, String sequence){
-        System.out.println(sequence);
+        System.out.println(player.getName() + ": " + sequence);
         if (!spellSequences.containsKey(sequence)){
-            System.out.println("No spell sequence found for " + sequence);
             return "FAIL";
         }
 

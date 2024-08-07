@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.puggu.magicandskills.MagicAndSkills;
 import org.puggu.magicandskills.ability.magic.MagicFireball;
+import org.puggu.magicandskills.ability.skill.ArrowGatling;
 import org.puggu.magicandskills.ability.skill.Substitution;
 import org.puggu.magicandskills.managers.PlayerProgressionManager;
 
@@ -34,6 +35,9 @@ public class LearnAbility implements CommandExecutor {
                 break;
             case "substitution":
                 key = new Substitution(plugin, player).getAbilityKey();
+                break;
+            case "arrowgatling":
+                key = new ArrowGatling(plugin, player).getAbilityKey();
                 break;
             default:
                 return false;
