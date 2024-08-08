@@ -9,8 +9,8 @@ import org.puggu.magicandskills.ability.ReasonForCastFail;
 
 public abstract class Skill extends Ability {
     private final int staminaCost;
-    protected Skill(MagicAndSkills plugin, Player player, long cooldownTime, int staminaCost, NamespacedKey abilityKey) {
-        super(plugin, player, cooldownTime, staminaCost, abilityKey);
+    protected Skill(MagicAndSkills plugin, Player player, int staminaCost, NamespacedKey abilityKey) {
+        super(plugin, player, staminaCost, abilityKey);
         this.staminaCost = staminaCost;
     }
 

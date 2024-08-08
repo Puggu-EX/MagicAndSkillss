@@ -10,8 +10,8 @@ import org.puggu.magicandskills.ability.ReasonForCastFail;
 public abstract class Spell extends Ability {
     private final int cost;
 
-    protected Spell(MagicAndSkills plugin, Player player, long cooldownTime, int cost, NamespacedKey abilityKey) {
-        super(plugin, player, cooldownTime, cost, abilityKey);
+    protected Spell(MagicAndSkills plugin, Player player, int cost, NamespacedKey abilityKey) {
+        super(plugin, player, cost, abilityKey);
         this.cost = cost;
     }
 
