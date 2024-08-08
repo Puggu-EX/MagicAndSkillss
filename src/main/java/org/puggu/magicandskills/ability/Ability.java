@@ -10,17 +10,25 @@ import org.puggu.magicandskills.actionbar.UpdateActionBarEvent;
 
 public abstract class Ability {
     protected final MagicAndSkills plugin;
-    protected final Player player;
-    protected long cooldown;
-    protected final int cost;
     protected final NamespacedKey abilityKey;
+    protected final Player player; // Caster of spell
+    protected final int cost;   // Cost of spell
+    protected int level;  // Progression level of spell (defaults to 1)
 
-    protected Ability(MagicAndSkills plugin, Player player, long cooldown, int cost, NamespacedKey abilityKey) {
+    protected Ability(MagicAndSkills plugin, Player player, int cost, NamespacedKey abilityKey) {
         this.plugin = plugin;
-        this.cooldown = cooldown;
         this.cost = cost;
         this.player = player;
         this.abilityKey = abilityKey;
+        this.level = 1;
+    }
+
+    protected Ability(MagicAndSkills plugin, Player player, int cost, NamespacedKey abilityKey, int level) {
+        this.plugin = plugin;
+        this.cost = cost;
+        this.player = player;
+        this.abilityKey = abilityKey;
+        this.level = level;
     }
 
 //    private long lastUseTime = 0;
@@ -37,11 +45,6 @@ public abstract class Ability {
 //        return cooldowns.get(player.getUniqueId());
         return -1L;
     }
-
-    public boolean isOnCooldown() {
-        return (System.currentTimeMillis() - getCooldown()) < cooldown;
-    }
-
 
     /**
      * The ability's main process
@@ -98,6 +101,10 @@ public abstract class Ability {
         ability();
         // TODO: Set action bar sequence back to default after casting spell
         // Bukkit.getServer().getPluginManager().callEvent(new UpdateActionBarEvent(player));
+    }
+
+    public void setLevel(int level){
+        this.level = level;
     }
 
     public NamespacedKey getAbilityKey() {
