@@ -21,11 +21,9 @@ import java.util.Objects;
 public final class MagicAndSkills extends JavaPlugin {
 
     private int actionBarTask;
-//    private int energyRegenTask;
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
-    private static PlayerCooldownManager playerCooldownManager;
 
     @Override
     public void onEnable() {
@@ -45,11 +43,6 @@ public final class MagicAndSkills extends JavaPlugin {
 
         DisplayActionBarSchedule displayActionBarSchedule = new DisplayActionBarSchedule(this);
         actionBarTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, displayActionBarSchedule, 0L, 20L);
-
-//        EnergyRegenScheduler energyRegenScheduler = new EnergyRegenScheduler(this);
-//        energyRegenTask = this.getServer().getScheduler().scheduleSyncRepeatingTask(this, energyRegenScheduler, 0L, 20L);
-
-        playerCooldownManager = new PlayerCooldownManager(this);
     }
 
     public static PlayerMenuUtility getPlayerMenuUtility(Player p) {
@@ -64,10 +57,6 @@ public final class MagicAndSkills extends JavaPlugin {
         } else {
             return playerMenuUtilityMap.get(p); //Return the object by using the provided player
         }
-    }
-
-    public static PlayerCooldownManager getPlayerCooldownManager() {
-        return playerCooldownManager;
     }
 
     @Override
