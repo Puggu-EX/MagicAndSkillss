@@ -31,13 +31,13 @@ public class LearnAbility implements CommandExecutor {
 
         switch (args[1].toLowerCase()) {
             case "magicfireball":
-                key = new MagicFireball(plugin, player).getAbilityKey();
+                key = MagicAndSkills.magicFireballKey;
                 break;
             case "substitution":
-                key = new Substitution(plugin, player).getAbilityKey();
+                key = MagicAndSkills.substitutionKey;
                 break;
             case "arrowgatling":
-                key = new ArrowGatling(plugin, player).getAbilityKey();
+                key = MagicAndSkills.arrowGatling;
                 break;
             default:
                 return false;

@@ -15,7 +15,7 @@ import java.util.List;
 public class ArrowGatling extends Spell {
 
     public ArrowGatling(MagicAndSkills plugin, Player player) {
-        super(plugin, player, 2000, new NamespacedKey(plugin, "ArrowGatling"));
+        super(plugin, player, 2000, MagicAndSkills.arrowGatling);
     }
 
     @Override

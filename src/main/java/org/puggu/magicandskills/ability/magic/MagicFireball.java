@@ -16,7 +16,7 @@ import org.puggu.magicandskills.MagicAndSkills;
 public class MagicFireball extends Spell implements Listener {
 
     public MagicFireball(MagicAndSkills plugin, Player player) {
-        super(plugin, player, 2000, new NamespacedKey(plugin, "MagicFireball"));
+        super(plugin, player, 2000, MagicAndSkills.magicFireballKey);
     }
 
 

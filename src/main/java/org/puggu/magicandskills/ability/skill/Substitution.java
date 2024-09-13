@@ -14,7 +14,7 @@ import org.puggu.magicandskills.MagicAndSkills;
 public class Substitution extends Skill implements Listener {
 
     public Substitution(MagicAndSkills plugin, Player player) {
-        super(plugin, player, 4000, new NamespacedKey(plugin, "Substitution"));
+        super(plugin, player, 4000, MagicAndSkills.substitutionKey);
     }
 
     @EventHandler

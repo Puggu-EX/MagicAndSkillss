@@ -1,5 +1,6 @@
 package org.puggu.magicandskills;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.puggu.magicandskills.commands.GiveWandCommand;
@@ -15,6 +16,7 @@ import org.puggu.magicandskills.managers.PlayerClickManager;
 import org.puggu.magicandskills.managers.PlayerCooldownManager;
 import org.puggu.magicandskills.menusystem.PlayerMenuUtility;
 
+import javax.naming.Name;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -24,6 +26,9 @@ public final class MagicAndSkills extends JavaPlugin {
 
     private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
 
+    public static  NamespacedKey magicFireballKey;
+    public static NamespacedKey substitutionKey;
+    public static NamespacedKey arrowGatling;
 
     @Override
     public void onEnable() {
@@ -35,6 +40,11 @@ public final class MagicAndSkills extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new OnPlayerJoinInit(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerClickManager(this), this);
         this.getServer().getPluginManager().registerEvents(new DisplayActionBarSchedule(this), this);
+
+        // Keys for all abilities
+        magicFireballKey = new NamespacedKey(this, "MagicFireball");
+        substitutionKey = new NamespacedKey(this, "Substitution");
+        arrowGatling = new NamespacedKey(this, "ArrowGatling");
 
 
         Objects.requireNonNull(this.getCommand("suicide")).setExecutor(new SuicideCommand());
